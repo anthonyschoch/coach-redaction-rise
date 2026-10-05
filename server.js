@@ -5,12 +5,13 @@ import { getChatProvider } from "./lib/providers.js";
 
 const app = express();
 const port = Number(process.env.PORT || 3000);
+const minDraftChars = Number(process.env.MIN_DRAFT_CHARS || 20);
 const maxDraftChars = Number(process.env.MAX_DRAFT_CHARS || 15_000);
 const maxMessageChars = Number(process.env.MAX_MESSAGE_CHARS || 2_000);
 const maxChatTurns = Number(process.env.MAX_CHAT_TURNS || 5);
 
 const requestSchema = z.object({
-  draft: z.string().trim().min(80).max(maxDraftChars),
+  draft: z.string().trim().min(minDraftChars).max(maxDraftChars),
   messages: z.array(z.object({
     role: z.enum(["user", "assistant"]),
     content: z.string().trim().min(1).max(maxMessageChars)
@@ -33,7 +34,7 @@ app.use(express.static("public"));
 
 app.get("/api/config", (_request, response) => response.json({
   assessment,
-  limits: { maxDraftChars, maxMessageChars, maxChatTurns },
+  limits: { minDraftChars, maxDraftChars, maxMessageChars, maxChatTurns },
   provider: process.env.AI_PROVIDER || "mock"
 }));
 app.get("/api/health", (_request, response) => response.json({ ok: true, provider: process.env.AI_PROVIDER || "mock" }));
