@@ -20,15 +20,18 @@ async function initialise() {
   els.rubric.innerHTML = config.assessment.rubric.map((item) => `<article><div><strong>${escapeHtml(item.label)}</strong><span>${item.weight} %</span></div><p>${escapeHtml(item.description)}</p></article>`).join("");
   els["criteria-mini"].innerHTML = config.assessment.rubric.map((item) => `<li>${escapeHtml(item.label)}</li>`).join("");
   els["mode-badge"].textContent = config.provider === "mock" ? "Mode démonstration" : "IA activée";
-  els["char-count"].textContent = `0 / ${config.limits.maxDraftChars.toLocaleString("fr-FR")} caractères`;
+  els["char-count"].textContent = `Minimum ${config.limits.minDraftChars} caractères`;
 }
 
 function updateDraftState() {
   const value = els.draft.value;
   const words = countWords(value);
   els["word-count"].textContent = `${words} mot${words > 1 ? "s" : ""}`;
-  els["char-count"].textContent = `${value.length.toLocaleString("fr-FR")} / ${config.limits.maxDraftChars.toLocaleString("fr-FR")} caractères`;
-  els.start.disabled = value.trim().length < 80 || value.length > config.limits.maxDraftChars;
+  const trimmedLength = value.trim().length;
+  els["char-count"].textContent = trimmedLength < config.limits.minDraftChars
+    ? `${trimmedLength} / ${config.limits.minDraftChars} caractères minimum`
+    : `${value.length.toLocaleString("fr-FR")} / ${config.limits.maxDraftChars.toLocaleString("fr-FR")} caractères`;
+  els.start.disabled = trimmedLength < config.limits.minDraftChars || value.length > config.limits.maxDraftChars;
 }
 
 function updateComposerState() {
