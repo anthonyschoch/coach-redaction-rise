@@ -1,0 +1,16 @@
+{
+  "name": "rise-ai-feedback-poc",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js",
+    "check": "node --check server.js && node --check lib/providers.js && node --check public/app.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "zod": "^3.25.76"
+  }
+}

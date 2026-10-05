@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: coach-redaction-rise
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: AI_PROVIDER
+        value: mock
+      - key: MAX_DRAFT_CHARS
+        value: "15000"
+      - key: MAX_MESSAGE_CHARS
+        value: "2000"
+      - key: MAX_CHAT_TURNS
+        value: "5"

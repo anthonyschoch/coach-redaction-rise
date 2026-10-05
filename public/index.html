@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Coach de rédaction universitaire intégré dans Rise">
+  <title>Coach de rédaction</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Accueil"><span>F</span> Coach de rédaction</a>
+      <span id="mode-badge" class="mode-badge">Mode démonstration</span>
+    </header>
+
+    <section class="intro">
+      <p class="eyebrow">Développement durable en pratique</p>
+      <h1>Faites progresser<br>votre <em>raisonnement.</em></h1>
+      <p>Collez votre brouillon, recevez un premier retour, puis échangez avec le coach pour approfondir vos choix.</p>
+    </section>
+
+    <section id="setup" class="setup-layout">
+      <aside class="brief-card">
+        <p class="kicker">Votre activité</p>
+        <h2 id="assessment-title"></h2>
+        <p id="assessment-instructions"></p>
+        <details>
+          <summary>Voir les critères</summary>
+          <div id="rubric" class="rubric"></div>
+        </details>
+      </aside>
+
+      <div class="draft-card">
+        <div class="numbered-title"><span>1</span><div><p class="kicker">Votre travail</p><h2>Collez votre brouillon</h2></div></div>
+        <label class="sr-only" for="draft">Votre brouillon</label>
+        <textarea id="draft" rows="12" placeholder="Collez votre texte ici…"></textarea>
+        <div class="draft-meta"><span id="word-count">0 mot</span><span id="char-count"></span></div>
+        <div class="privacy"><span aria-hidden="true">◇</span><span>N’ajoutez ni nom, ni matricule, ni donnée personnelle. Le prototype ne conserve pas votre conversation.</span></div>
+        <div id="setup-error" class="error" role="alert" hidden></div>
+        <button id="start" class="primary" type="button" disabled>Commencer l’échange <span>→</span></button>
+      </div>
+    </section>
+
+    <section id="chat-section" class="chat-shell" hidden>
+      <aside class="chat-context">
+        <p class="kicker">Votre brouillon</p>
+        <p id="draft-preview"></p>
+        <button id="edit-draft" class="text-button" type="button">Modifier et recommencer</button>
+        <div class="criteria-mini"><p class="kicker">Critères utilisés</p><ul id="criteria-mini"></ul></div>
+      </aside>
+
+      <div class="chat-card">
+        <div class="chat-heading">
+          <div class="numbered-title"><span>2</span><div><p class="kicker">Échange formatif</p><h2>Approfondissez votre travail</h2></div></div>
+          <span id="turn-count" class="turn-count">0/5 questions</span>
+        </div>
+        <div id="messages" class="messages" aria-live="polite"></div>
+        <div id="chat-error" class="error" role="alert" hidden></div>
+        <form id="chat-form" class="composer">
+          <label class="sr-only" for="chat-input">Votre question</label>
+          <textarea id="chat-input" rows="2" placeholder="Posez une question sur le retour…"></textarea>
+          <button id="send" class="send" type="submit" disabled aria-label="Envoyer">↑</button>
+        </form>
+        <div class="chat-footer">
+          <span>Entrée pour envoyer · Maj + Entrée pour une nouvelle ligne</span>
+          <div>
+            <a id="download" class="secondary" href="#" download="conversation-formative.txt">↓ Télécharger l’échange</a>
+            <button id="new-chat" class="secondary" type="button">Nouvel échange</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>Retour formatif automatique · Votre enseignant reste responsable de l’évaluation</footer>
+  </main>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
