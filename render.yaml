@@ -9,6 +9,8 @@ services:
     envVars:
       - key: AI_PROVIDER
         value: mock
+      - key: MIN_DRAFT_CHARS
+        value: "20"
       - key: MAX_DRAFT_CHARS
         value: "15000"
       - key: MAX_MESSAGE_CHARS
