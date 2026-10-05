@@ -23,7 +23,7 @@ const requestSchema = z.object({
 
 app.disable("x-powered-by");
 app.use((_request, response, next) => {
-  response.setHeader("Content-Security-Policy", "frame-ancestors 'self' https://*.articulate.com https://*.eu.articulate.com https://*.articulateusercontent.com https://*.articulateusercontent.eu https://riseusercontent.com https://*.riseusercontent.com https://riseusercontent.eu https://*.riseusercontent.eu; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self'");
+  response.setHeader("Content-Security-Policy", "frame-ancestors 'self' https:; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self'");
   response.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
   response.setHeader("X-Content-Type-Options", "nosniff");
   response.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
